@@ -6,7 +6,11 @@ use yii\bootstrap\Html;
 ?>
 
 <div class="prize">
-    <?php if (!empty($prize)): ?>
+    <?php if (Yii::$app->session->hasFlash('errorPrize')): ?>
+        <div class="alert alert-error">
+            Произошла ошибка. Попробуйте заново.
+        </div>
+    <?php else:?>
         <?php
         $prizeStr = "Вы выиграли ";
         $prizeId = $prize->id;
@@ -16,13 +20,13 @@ use yii\bootstrap\Html;
         switch ($prizeType) {
             case 1: // деньги
                 echo '<h1>' . $prizeStr . 'денежный приз в сумме ' . $sum . ' руб. !</h1>';
-                echo Html::a('Отправить деньги на счет', ['/transfer/transfer-to-card', 'prize_id' => $prize->id,  'sum' => $sum], ['class' => 'btn btn-primary sf_r10']);
-                echo Html::a('Пересчитать в баллы', ['/quiz/convert-to-bonus', 'prize_id' => $prize->id,  'money_sum' => $sum], ['class' => 'btn btn-primary sf_r10']);
+                echo Html::a('Отправить деньги на счет', ['/transfer/transfer-to-card'], ['class' => 'btn btn-primary sf_r10']);
+                echo Html::a('Пересчитать в баллы', ['/quiz/convert-to-bonus'], ['class' => 'btn btn-primary sf_r10']);
                 echo Html::a('Отмена', ['/quiz/play'], ['class'=>'btn btn-primary']) ;
                 break;
             case 2: // бонусы
                 echo '<h1>' . $prizeStr . 'бонусы в количестве ' . $sum .  ' баллов!</h1>';
-                echo Html::a('Получить бонусы', ['/quiz/bonus', 'sum' => $sum], ['class' => 'btn btn-primary sf_r10']);
+                echo Html::a('Получить бонусы', ['/quiz/bonus'], ['class' => 'btn btn-primary sf_r10']);
                 echo Html::a('Отмена', ['/quiz/play'], ['class'=>'btn btn-primary']) ;
                 break;
             case 3: // вещь
@@ -34,7 +38,5 @@ use yii\bootstrap\Html;
                 echo "Не удалось получить приз. Попробуйте позже.";
         }
         ?>
-    <?php else:?>
-        <h1>Призов больше нет!</h1>
     <?php endif;?>
 </div>

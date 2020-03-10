@@ -36,9 +36,9 @@ AppAsset::register($this);
         ],
     ]);
 
-    $menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
+    $menuItems[] = ['label' => 'Задание', 'url' => ['/site/index']];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Регистрация', 'url'=> ['/site/login']];
+        //$menuItems[] = ['label' => 'Регистрация', 'url'=> ['/site/login']];
         $menuItems[] = ['label' => 'Войти', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Розыгрыш призов', 'url' => ['/quiz/play']];

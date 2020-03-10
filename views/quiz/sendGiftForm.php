@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Доставка';
+$this->title = 'Доставка!';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="alert alert-success">
             Ваш приз отправлен в службу доставку.
         </div>
-    <?php elseif (Yii::$app->session->hasFlash('sendGiftFormNoPrizeId')):?>
+    <?php elseif (Yii::$app->session->hasFlash('errorSendGift')):?>
         <div class="alert alert-error">
             Произошла ошибка. Попробуйте заново.
         </div>
